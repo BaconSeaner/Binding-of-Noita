@@ -1,0 +1,8 @@
+<Mod
+	name="Binding of Noita"
+	description="A mod that aims to add as many items from Binding of Isaac as possible to Noita.\n\nCurrently added:\n- Loki's Horns\n- 3 Dollar Bill"
+	tags="spells"
+	dont_upload_folders=".vs"
+	dont_upload_files=".gitignore, README.md"
+> 
+</Mod>
