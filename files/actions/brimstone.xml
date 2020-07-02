@@ -1,0 +1,154 @@
+<Entity name="$projectile_default" >
+	<Base file="data/entities/base_projectile.xml" >
+		<VelocityComponent
+			air_friction="0.0"
+			mass="0.0"
+			gravity_y="0.0"
+			>
+		</VelocityComponent>
+	</Base>
+
+	<ProjectileComponent 
+		speed_min="1"
+		speed_max="1"
+		friction="0.0"
+		direction_random_rad="0.05"
+		on_death_gfx_leave_sprite="0" 
+		lifetime="32"
+		damage="5"
+		lifetime_randomness="0"
+		ragdoll_force_multiplier="0.0"
+		hit_particle_force_multiplier="5.5 "
+		camera_shake_when_shot="3.0"
+		shoot_light_flash_radius="80"
+		muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_launcher.xml"
+		knockback_force="2.5"
+		on_collision_die="0"
+		on_collision_remove_projectile="0"
+		on_lifetime_out_explode="0"
+		collide_with_world="0"
+		penetrate_entities="0"
+		collide_with_tag=""
+		>
+	</ProjectileComponent>
+
+	<LuaComponent
+		script_source_file="mods/binding-of-noita/files/brimstone.lua"
+		execute_every_n_frame="30"
+		remove_after_executed="1"
+		>
+	</LuaComponent>
+
+	<!-- FX -->
+	<!-- image emitter -->
+	<SpriteParticleEmitterComponent
+		sprite_file="data/particles/redwhirl_$[1-8].png"
+		sprite_centered="1"
+		delay="0"
+		lifetime="1.5"
+		color.r="1" color.g="1" color.b="1" color.a="0.75"
+		color_change.r="0" color_change.g="0" color_change.b="0" color_change.a="-0.8"
+		velocity.x="0" velocity.y="0"
+		gravity.x="0" gravity.y="0"
+		velocity_slowdown="0.35"
+		rotation="0"
+		angular_velocity="7.5"
+		render_back="1"
+		use_velocity_as_rotation="0"
+		scale.x=".5" scale.y=".5"
+		scale_velocity.x="1.0075" scale_velocity.y="1.0075"
+		emission_interval_min_frames="2"
+		emission_interval_max_frames="4"
+		count_min="1" count_max="1"
+		randomize_position.min_x="-0.5"
+		randomize_position.max_x="0.5"
+		randomize_position.min_y="-0.5"
+		randomize_position.max_y="0.5"
+		randomize_velocity.min_x="-5"
+		randomize_velocity.max_x="5"
+		randomize_velocity.min_y="-5"
+		randomize_velocity.max_y="5"
+		randomize_lifetime.min="-0.2"
+		randomize_lifetime.max="0.2"
+		randomize_angular_velocity.min="-3.5"
+		randomize_angular_velocity.max="3.5"
+		randomize_rotation.min="-90"
+		randomize_rotation.max="90"
+		>
+	</SpriteParticleEmitterComponent>
+
+	<!-- launch blast a -->
+	<ParticleEmitterComponent 
+		emitted_material_name="plasma_fading_pink"
+		delay_frames="30"
+		offset.x="0"
+		offset.y="0"
+		x_pos_offset_min="-5"
+		x_pos_offset_max="5"
+		y_pos_offset_min="-5"
+		y_pos_offset_max="5"
+		gravity.y="0.0"
+		x_vel_min="-20"
+		x_vel_max="800"
+		y_vel_min="-30"
+		y_vel_max="30"
+		velocity_always_away_from_center="1"
+		area_circle_radius.min="10"
+		area_circle_radius.max="10"
+		friction="4"
+		count_min="30"
+		count_max="50"
+		lifetime_min="0.1"
+		lifetime_max="0.4"
+		emitter_lifetime_frames="3"
+		emit_real_particles="0"
+		render_on_grid="1"
+		emit_cosmetic_particles="1"
+		fade_based_on_lifetime="0"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<!-- launch blast circle -->
+	<ParticleEmitterComponent 
+		emitted_material_name="plasma_fading_pink"
+		delay_frames="20"
+		offset.x="0"
+		offset.y="0"
+		x_pos_offset_min="-0"
+		x_pos_offset_max="0"
+		y_pos_offset_min="-0"
+		y_pos_offset_max="0"
+		gravity.y="0.0"
+		x_vel_min="-0"
+		x_vel_max="40"
+		y_vel_min="-5"
+		y_vel_max="5"
+		velocity_always_away_from_center="1"
+		area_circle_radius.min="9"
+		area_circle_radius.max="9"
+		friction="0.5"
+		count_min="60"
+		count_max="90"
+		lifetime_min="0.5"
+		lifetime_max="3.0"
+		emitter_lifetime_frames="2"
+		emit_real_particles="0"
+		render_on_grid="1"
+		emit_cosmetic_particles="1"
+		fade_based_on_lifetime="1"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<LightComponent 
+		radius="100" >
+	</LightComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.snd"
+		event_root="player_projectiles/cloud">
+	</AudioComponent>
+</Entity>
