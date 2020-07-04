@@ -68,8 +68,8 @@ table.insert( actions,
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
-	price = 360,
-	mana = 50,
+	price = 660,
+	mana = 70,
 	--max_uses = 16,
 	action 		= function()
 			add_projectile("mods/binding-of-noita/files/actions/charge.xml")
