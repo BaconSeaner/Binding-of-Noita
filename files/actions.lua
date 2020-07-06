@@ -68,9 +68,9 @@ table.insert( actions,
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
-	price = 660,
-	mana = 70,
-	--max_uses = 16,
+	price = 1666,
+	mana = 90,
+	--max_uses = 100,
 	action 		= function()
 			add_projectile("mods/binding-of-noita/files/actions/charge.xml")
 
@@ -83,5 +83,46 @@ table.insert( actions,
 			add_projectile("mods/binding-of-noita/files/actions/brimstone.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 70
 			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "DR_FETUS",
+	name 		= "Dr.Fetus",
+	description = "Unlimited bombs!",
+	sprite 		= "mods/Binding-of-Noita/files/actions/dr_fetus.png",
+	type 		= ACTION_TYPE_PROJECTILE,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1,1,1",
+	price = 1350,
+	mana = 90,
+	--max_uses = 0,
+	--custom_xml_file = "data/entities/misc/custom_cards/bomb.xml",
+	action 		= function()
+		add_projectile("data/entities/projectiles/bomb.xml")
+		c.fire_rate_wait = c.fire_rate_wait + 120
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "INFESTATION2",
+	name 		= "Infestation 2",
+	description = "Enemeies are infested!",
+	sprite 		= "mods/Binding-of-Noita/files/actions/infestation2.png",
+	--sprite_unidentified = "data/ui_gfx/gun_actions/freeze_unidentified.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1,1,1",
+	price = 450,
+	mana = 25,
+	--max_uses = 50,
+	action 		= function()
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		local rnd = Random(1,10)
+		if rnd >= 7 then return end
+		c.extra_entities = c.extra_entities .. "mods/binding-of-noita/files/actions/infestation2.xml,"
+		draw_actions( 1, true )
 	end,
 } )
