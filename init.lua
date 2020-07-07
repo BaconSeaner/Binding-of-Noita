@@ -16,6 +16,7 @@ function OnPlayerSpawned( player_entity ) -- this
 end
 ]]--
 
-ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", "mods/Binding-of-Noita/files/actions.lua" )
+ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", "mods/binding-of-noita/files/actions.lua" )
+ModRegisterAudioEventMappings( "mods/binding-of-noita/files/audio_events.txt" )
 
 print("Binding of Noita initialized.")

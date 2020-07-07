@@ -28,7 +28,7 @@ table.insert( actions,
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,2,5,6,6",
-	price = 320,
+	price = 400,
 	mana = 35,
 	--max_uses = 100,
 	action 		= function()
@@ -107,7 +107,7 @@ table.insert( actions,
 
 table.insert( actions,
 {
-	id          = "INFESTATION2",
+	id          = "INFESTATION_2",
 	name 		= "Infestation 2",
 	description = "Enemeies are infested!",
 	sprite 		= "mods/Binding-of-Noita/files/actions/infestation2.png",
@@ -124,5 +124,27 @@ table.insert( actions,
 		if rnd >= 7 then return end
 		c.extra_entities = c.extra_entities .. "mods/binding-of-noita/files/actions/infestation2.xml,"
 		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "TECH_2",
+	name 		= "Technology 2",
+	description = "Bzzzt!",
+	sprite 		= "mods/Binding-of-Noita/files/actions/tech_2.png",
+	type 		= ACTION_TYPE_PROJECTILE,
+	spawn_level			= "2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1",
+	price = 1200,
+	mana = 4,
+	--max_uses = 100,
+	action 		= function()
+			c.lightning_count = c.lightning_count + 1
+			c.damage_electricity_add = c.damage_electricity_add + 0.01
+			c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
+			add_projectile("mods/binding-of-noita/files/actions/tech_2.xml")
+			c.fire_rate_wait = c.fire_rate_wait - 100
+			current_reload_time = current_reload_time - current_reload_time + 4
 	end,
 } )
