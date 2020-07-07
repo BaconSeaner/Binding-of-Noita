@@ -9,8 +9,8 @@
   
 	<ProjectileComponent 
 		_enabled="1" 
-		speed_min="90"
-		speed_max="108"
+		speed_min="130"
+		speed_max="150"
 		on_death_explode="1"
 		on_death_gfx_leave_sprite="0" 
 		on_death_emit_particle="1"
@@ -18,9 +18,6 @@
 		on_death_emit_particle_count="100"
 		on_lifetime_out_explode="1"
 		on_collision_die="1"
-		on_collision_spawn_entity="1"
-		spawn_entity="mods/Binding-of-Noita/files/actions/bobs_splat.xml"
-		spawn_entity_is_projectile="0"
 		die_on_low_velocity="1"
 		damage="0.24"
 		bounce_always="1"
@@ -34,31 +31,31 @@
 		knockback_force="10.0"
 		physics_impulse_coeff="2000"
 		play_damage_sounds="1" >
-        <config_explosion
-        never_cache="0" 
-        damage="2"
-        camera_shake="16" 
-        explosion_radius="32" 
-        explosion_sprite="data/particles/explosion_128.xml" 
-        explosion_sprite_lifetime="0" 
-        load_this_entity="data/entities/misc/loose_ground.xml"
-        create_cell_probability="40" 
-        hole_destroy_liquid="0" 
-        hole_enabled="1" 
-        ray_energy="6000000"
-        particle_effect="1" 
-        damage_mortals="1"
-        physics_explosion_power.min="2.2" 
-        physics_explosion_power.max="3.6" 
-        physics_throw_enabled="1"
-        shake_vegetation="1" 
-        sparks_count_min="12" 
-        sparks_count_max="15" 
-        sparks_enabled="1" 
-        stains_enabled="1" 
-        stains_radius="15" 
-		max_durability_to_destroy="11" >
-        </config_explosion>
+		<config_explosion
+        never_cache="1" 
+		damage="0"
+		camera_shake="3.5" 
+		explosion_radius="10" 
+		explosion_sprite="data/particles/explosion_032_slimeburst.xml" 
+		explosion_sprite_lifetime="0" 
+		create_cell_material="acid"
+		create_cell_probability="70"  
+		hole_destroy_liquid="0" 
+		hole_enabled="1" 
+		hole_image="data/temp/explosion_hole.png" 
+		particle_effect="0" 
+		damage_mortals="1" 
+		physics_explosion_power.min="0.5"
+		physics_explosion_power.max="1.0"
+		physics_throw_enabled="1" 
+		shake_vegetation="1" 
+		sparks_count_max="0" 
+		sparks_count_min="0" 
+		sparks_enabled="0" 
+		stains_enabled="1" 
+		stains_radius="9"
+        audio_enabled="1" >
+		</config_explosion>
 	</ProjectileComponent>
 
     <PhysicsThrowableComponent

@@ -1,14 +1,18 @@
 <Mod
 	name="Binding of Noita"
-	description="[img]https://i.imgur.com/z5QmOTt.gif[/img]\nA mod that aims to add as many items from Binding of Isaac as possible to Noita.\n
-	This mod is a work in progress where I will gradually add items.\n\n
-	Currently added:\n
-	- 3 Dollar Bill\n
-	- Bob's Rotten Head\n
-	- Brimstone\n
-	- Dr. Fetus\n
-	- Loki's Horns\n
-	- Infestation 2"
+	description="A mod that aims to add as many items from Binding of Isaac as possible to Noita.\n
+This mod is a work in progress where I will gradually add items.
+
+Currently added:
+	- 3 Dollar Bill
+	- Bob's Rotten Head
+	- Brimstone
+	- Dr. Fetus
+	- Loki's Horns
+	- Infestation 2
+[img]https://media1.giphy.com/media/VfEJYmcgfVPKvU3VL1/giphy.gif[/img]
+[img]https://media2.giphy.com/media/gKqroC0XfA0deWYc4i/giphy.gif[/img]
+[img]https://i.imgur.com/z5QmOTt.gif[/img]"
 	tags="spells"
 	dont_upload_folders=".vs"
 	dont_upload_files=".gitignore, README.md"

@@ -27,7 +27,7 @@
 		on_collision_remove_projectile="0"
 		on_lifetime_out_explode="0"
 		collide_with_world="0"
-		penetrate_entities="0"
+		penetrate_entities="1"
 		collide_with_tag=""
 		>
 	</ProjectileComponent>

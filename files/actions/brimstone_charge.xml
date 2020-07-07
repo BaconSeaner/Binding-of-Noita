@@ -41,6 +41,7 @@
     shoot_light_flash_b="70" 
 	knockback_force="2.0"
 	physics_impulse_coeff="2000"
+    penetrate_entities="1"
 	>
     <config_explosion
       never_cache="1" 

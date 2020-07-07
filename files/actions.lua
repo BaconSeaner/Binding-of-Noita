@@ -6,7 +6,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/actions/lokis_horns.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "10,10,5,1,1,1,1",
+	spawn_probability	= "5,4,2,1,1,1,1",
 	price = 50,
 	mana = 0,
 	--max_uses = 100,
@@ -27,9 +27,9 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/actions/3_dollar_bill.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "2,1,1,2,5,10,10",
+	spawn_probability	= "1,1,1,2,5,6,6",
 	price = 320,
-	mana = 25,
+	mana = 35,
 	--max_uses = 100,
 	action 		= function()
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
@@ -37,7 +37,7 @@ table.insert( actions,
 		local rnd = Random(1, #types)
 		local rand_shot = tostring(types[rnd]) .. ".xml"
 		add_projectile("data/entities/projectiles/deck/" .. rand_shot)
-		c.fire_rate_wait = c.fire_rate_wait + 7
+		c.fire_rate_wait = c.fire_rate_wait + 10
 	end,
 } )
 
@@ -72,7 +72,7 @@ table.insert( actions,
 	mana = 90,
 	--max_uses = 100,
 	action 		= function()
-			add_projectile("mods/binding-of-noita/files/actions/charge.xml")
+			add_projectile("mods/binding-of-noita/files/actions/brimstone_charge.xml")
 
 			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
 			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
