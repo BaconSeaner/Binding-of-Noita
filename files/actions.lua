@@ -75,15 +75,15 @@ table.insert( actions,
 	mana = 90,
 	--max_uses = 100,
 	action 		= function()
-			add_projectile("mods/binding-of-noita/files/actions/brimstone_charge.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_charge.xml")
 
-			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
-			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
-			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
-			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
-			add_projectile("mods/binding-of-noita/files/actions/brimstone_beam.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
 			
-			add_projectile("mods/binding-of-noita/files/actions/brimstone.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 70
 			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
 	end,
@@ -125,7 +125,7 @@ table.insert( actions,
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 		local rnd = Random(1,10)
 		if rnd >= 7 then return end
-		c.extra_entities = c.extra_entities .. "mods/binding-of-noita/files/actions/infestation2.xml,"
+		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/infestation2.xml,"
 		draw_actions( 1, true )
 	end,
 } )
@@ -146,7 +146,7 @@ table.insert( actions,
 			c.lightning_count = c.lightning_count + 1
 			c.damage_electricity_add = c.damage_electricity_add + 0.01
 			c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
-			add_projectile("mods/binding-of-noita/files/actions/technology.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
 			c.fire_rate_wait = c.fire_rate_wait - 100
 			current_reload_time = current_reload_time - current_reload_time + 4
 	end,
@@ -168,7 +168,7 @@ table.insert( actions,
 			c.lightning_count = c.lightning_count + 1
 			c.damage_electricity_add = c.damage_electricity_add + 0.01
 			c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
-			add_projectile("mods/binding-of-noita/files/actions/technology.xml")
+			add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
 	end,
 } )
 

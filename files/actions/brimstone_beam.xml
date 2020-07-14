@@ -44,7 +44,7 @@
 		ragdoll_force_multiplier="0.01"
 		ragdoll_fx_on_collision="BLOOD_SPRAY"
 		on_collision_spawn_entity="1"
-		spawn_entity="mods/binding-of-noita/files/actions/brimstone_effect.xml" >
+		spawn_entity="mods/Binding-of-Noita/files/actions/brimstone_effect.xml" >
 		<config_explosion
 			never_cache="1" 
 			never_cache="1"

@@ -33,7 +33,7 @@
 	</ProjectileComponent>
 
 	<LuaComponent
-		script_source_file="mods/binding-of-noita/files/brimstone.lua"
+		script_source_file="mods/Binding-of-Noita/files/brimstone.lua"
 		execute_every_n_frame="30"
 		remove_after_executed="1"
 		>

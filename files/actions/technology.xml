@@ -122,7 +122,7 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-	file="mods/binding-of-noita/files/mod.bank"
+	file="mods/Binding-of-Noita/files/mod.bank"
     event_root="snd_mod" >
   </AudioComponent>
 
