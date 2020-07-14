@@ -17,6 +17,7 @@ end
 ]]--
 
 ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", "mods/binding-of-noita/files/actions.lua" )
+--ModLuaFileAppend( "data/scripts/gun/gun.lua", "mods/binding-of-noita/files/gun.lua" )
 ModRegisterAudioEventMappings( "mods/binding-of-noita/files/audio_events.txt" )
 
 print("Binding of Noita initialized.")

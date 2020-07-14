@@ -2,20 +2,23 @@ table.insert( actions,
 {
 	id          = "LOKIS_HORNS",
 	name 		= "Loki's Horns",
-	description = "Chance to shoot a cross(4) shot",
+	description = "Chance to shoot a cross shot with most spells",
 	sprite 		= "mods/Binding-of-Noita/files/actions/lokis_horns.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "5,4,2,1,1,1,1",
+	spawn_probability	= "2,2,2,1,1,1,1",
 	price = 50,
 	mana = 0,
 	--max_uses = 100,
 	action 		= function()
-		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-		local rnd = Random(1,4)
-		if rnd ~= 1 then return end
-		draw_actions(4, true)
 		c.pattern_degrees = 180
+
+		local action = deck[ 1 ]
+		if action ~= nil then
+			for i = 1, 4 do
+				play_action( action )
+			end
+		end
 	end,
 } )
 
@@ -27,7 +30,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/actions/3_dollar_bill.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "1,1,1,2,5,6,6",
+	spawn_probability	= "1,1,1,1,2,2,3",
 	price = 400,
 	mana = 35,
 	--max_uses = 100,
@@ -131,8 +134,8 @@ table.insert( actions,
 {
 	id          = "TECH_2",
 	name 		= "Technology 2",
-	description = "Bzzzt!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/tech_2.png",
+	description = "Rapid Bzzzt",
+	sprite 		= "mods/Binding-of-Noita/files/actions/technology_2.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1",
@@ -143,8 +146,89 @@ table.insert( actions,
 			c.lightning_count = c.lightning_count + 1
 			c.damage_electricity_add = c.damage_electricity_add + 0.01
 			c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
-			add_projectile("mods/binding-of-noita/files/actions/tech_2.xml")
+			add_projectile("mods/binding-of-noita/files/actions/technology.xml")
 			c.fire_rate_wait = c.fire_rate_wait - 100
 			current_reload_time = current_reload_time - current_reload_time + 4
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "TECH_1",
+	name 		= "Technology",
+	description = "Bzzzt",
+	sprite 		= "mods/Binding-of-Noita/files/actions/technology_1.png",
+	type 		= ACTION_TYPE_PROJECTILE,
+	spawn_level			= "0,1",
+	spawn_probability	= "1,1",
+	price = 240,
+	mana = 4,
+	--max_uses = 100,
+	action 		= function()
+			c.lightning_count = c.lightning_count + 1
+			c.damage_electricity_add = c.damage_electricity_add + 0.01
+			c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
+			add_projectile("mods/binding-of-noita/files/actions/technology.xml")
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "POLYPHEMUS",
+	name 		= "Polyphemus",
+	description = "Crippling damage",
+	sprite 		= "mods/Binding-of-Noita/files/actions/polyphemus.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level                       = "3,4,5,6",
+	spawn_probability                 = "0.5,0.5,0.5,0.5",
+	price = 140,
+	mana = 40,
+	action 		= function()
+		c.damage_projectile_add = c.damage_projectile_add + .5
+		c.gore_particles    = c.gore_particles + 10
+		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 4
+		current_reload_time = (current_reload_time + 1) * 4
+		c.extra_entities    = c.extra_entities .. "data/entities/particles/tinyspark_red.xml,"
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10.0
+		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "SACRED_HEART",
+	name 		= "Sacred Heart",
+	description = "Guides your spells with holy might",
+	sprite 		= "mods/Binding-of-Noita/files/actions/sacred_heart.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level                       = "4,5,6",
+	spawn_probability                 = "0.5,0.5,0.5",
+	price = 1777,
+	mana = 75,
+	action 		= function()
+		c.damage_projectile_add = c.damage_projectile_add + .6
+		c.gore_particles    = c.gore_particles + 10
+		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 3
+		current_reload_time = (current_reload_time + 1) * 3
+		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/sacred_heart.xml,"
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 25.0
+		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "SPOON_BENDER",
+	name 		= "Spoon Bender",
+	description = "Lighlty psychic spells",
+	sprite 		= "mods/Binding-of-Noita/files/actions/spoon_bender.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level                       = "1,2,3,4,5,6",
+	spawn_probability                 = "0.5,0.5,0.5,0.5,0.5.0,5",
+	price = 330,
+	mana = 20,
+	action 		= function()
+		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/spoon_bender.xml,"
+		draw_actions( 1, true )
 	end,
 } )
