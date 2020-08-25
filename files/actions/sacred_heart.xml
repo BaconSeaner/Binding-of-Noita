@@ -63,7 +63,7 @@
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 
-		<ParticleEmitterComponent 
+	<ParticleEmitterComponent 
 		emitted_material_name="spark"
 		gravity.y="0.0"
 		offset.x="0"

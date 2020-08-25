@@ -31,7 +31,7 @@ table.insert( actions,
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,2,2,3",
-	price = 400,
+	price = 300,
 	mana = 35,
 	--max_uses = 100,
 	action 		= function()
@@ -118,7 +118,7 @@ table.insert( actions,
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
-	price = 450,
+	price = 400,
 	mana = 25,
 	--max_uses = 50,
 	action 		= function()
@@ -134,7 +134,7 @@ table.insert( actions,
 {
 	id          = "TECH_2",
 	name 		= "Technology 2",
-	description = "Rapid Bzzzt",
+	description = "Bzzzzzzzzzt!",
 	sprite 		= "mods/Binding-of-Noita/files/actions/technology_2.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "2,3,4,5,6",
@@ -156,7 +156,7 @@ table.insert( actions,
 {
 	id          = "TECH_1",
 	name 		= "Technology",
-	description = "Bzzzt",
+	description = "Bzzzt!",
 	sprite 		= "mods/Binding-of-Noita/files/actions/technology_1.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1",
@@ -180,16 +180,17 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/actions/polyphemus.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "3,4,5,6",
-	spawn_probability                 = "0.5,0.5,0.5,0.5",
-	price = 140,
+	spawn_probability                 = "0.4,0.4,0.4,0.4",
+	price = 750,
 	mana = 40,
 	action 		= function()
-		c.damage_projectile_add = c.damage_projectile_add + .5
+		c.damage_projectile_add = c.damage_projectile_add + .7
+		c.speed_multiplier = c.speed_multiplier * 0.4
 		c.gore_particles    = c.gore_particles + 10
 		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 4
 		current_reload_time = (current_reload_time + 1) * 4
 		c.extra_entities    = c.extra_entities .. "data/entities/particles/tinyspark_red.xml,"
-		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10.0
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 15.0
 		draw_actions( 1, true )
 	end,
 } )
@@ -202,16 +203,17 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/actions/sacred_heart.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "4,5,6",
-	spawn_probability                 = "0.5,0.5,0.5",
+	spawn_probability                 = "0.2,0.2,0.2",
 	price = 1777,
 	mana = 75,
 	action 		= function()
-		c.damage_projectile_add = c.damage_projectile_add + .6
+		c.damage_projectile_add = c.damage_projectile_add + 1
+		c.speed_multiplier = c.speed_multiplier * 0.5
 		c.gore_particles    = c.gore_particles + 10
-		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 3
-		current_reload_time = (current_reload_time + 1) * 3
+		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 4
+		current_reload_time = (current_reload_time + 1) * 4
 		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/sacred_heart.xml,"
-		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 25.0
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
 		draw_actions( 1, true )
 	end,
 } )
@@ -225,10 +227,29 @@ table.insert( actions,
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "1,2,3,4,5,6",
 	spawn_probability                 = "0.5,0.5,0.5,0.5,0.5.0,5",
-	price = 330,
+	price = 180,
 	mana = 20,
 	action 		= function()
 		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/spoon_bender.xml,"
 		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "NUMBER_ONE",
+	name 		= "Number One!",
+	description = "High fire rate at the cost of range.",
+	sprite 		= "mods/Binding-of-Noita/files/actions/number_one.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level                       = "1,2,3,4,5,6",
+	spawn_probability                 = "0.5,0.5,0.5,0.5,0.5.0,5",
+	price = 330,
+	mana = 5,
+	action 		= function()
+			c.fire_rate_wait = c.fire_rate_wait / 2
+			current_reload_time = current_reload_time / 2
+			c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/number_one.xml,"
+			draw_actions( 1, true )
 	end,
 } )

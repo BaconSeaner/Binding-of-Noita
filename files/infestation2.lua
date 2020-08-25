@@ -4,7 +4,6 @@ local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
 
 local target = EntityGetName( EntityGetClosest( x, y, "") )
-print( target )
 if ( target ~= "$animal_longleg" and target ~= "$projectile_default" and target ~= "unknown" and target ~= "") then
 
 	SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
