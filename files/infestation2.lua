@@ -1,5 +1,8 @@
 dofile_once("data/scripts/lib/utilities.lua")
 
+SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+if Random(1,10) <= 6 then return end
+
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
 

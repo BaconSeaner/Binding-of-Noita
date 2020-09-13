@@ -3,22 +3,25 @@ table.insert( actions,
 	id          = "LOKIS_HORNS",
 	name 		= "Loki's Horns",
 	description = "Chance to shoot a cross shot with most spells",
-	sprite 		= "mods/Binding-of-Noita/files/actions/lokis_horns.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/lokis_horns.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "2,2,2,1,1,1,1",
+	spawn_probability	= "2,2,2,2,1,1,1",
 	price = 50,
 	mana = 0,
 	--max_uses = 100,
 	action 		= function()
 		c.pattern_degrees = 180
-
-		local action = deck[ 1 ]
-		if action ~= nil then
-			for i = 1, 4 do
-				play_action( action )
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		if Random( 1, 4 ) == 1 then								--if 1/4 chance of proc
+			for i, action in ipairs( deck ) do					--Within the deck (inorder)
+				if action.type == ACTION_TYPE_PROJECTILE then	--Find first projectile action (within deck)
+					for i = 1, 3 do action.action() end			--Then act it an additional 3 times
+					break										--(Break so only FIRST projectile is proc'ed)
+				end
 			end
 		end
+		draw_actions( 1, true )
 	end,
 } )
 
@@ -27,18 +30,19 @@ table.insert( actions,
 	id          = "3_DOLLAR_BILL",
 	name 		= "3 Dollar Bill",
 	description = "A rainbow of spells!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/3_dollar_bill.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/3_dollar_bill.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,2,2,3",
-	price = 300,
-	mana = 35,
+	price = 260,
+	mana = 30,
 	--max_uses = 100,
 	action 		= function()
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-		local types = {"lance","laser","bouncy_orb","spore_pod","tentacle","rubber_ball","slime","arrow","fireball_ray","bullet_heavy","light_bullet","bullet","light_bullet_blue","bubbleshot"}
-		local rnd = Random(1, #types)
-		local rand_shot = tostring(types[rnd]) .. ".xml"
+		local types = {"lance","laser","bouncy_orb","spore_pod",
+			"tentacle","rubber_ball","slime","arrow","fireball_ray",
+			"bullet_heavy","light_bullet","bullet","light_bullet_blue","bubbleshot"}
+		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"
 		add_projectile("data/entities/projectiles/deck/" .. rand_shot)
 		c.fire_rate_wait = c.fire_rate_wait + 10
 	end,
@@ -49,7 +53,7 @@ table.insert( actions,
 	id          = "BOBS_HEAD",
 	name 		= "Bob's Rotten Head",
 	description = "Acidic Bomb",
-	sprite 		= "mods/Binding-of-Noita/files/actions/bobs_head.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/bobs_head.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
@@ -67,7 +71,7 @@ table.insert( actions,
 	id          = "BRIMSTONE",
 	name 		= "Brimstone",
 	description = "It radiates with energy!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/brimstone.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/brimstone.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
@@ -94,11 +98,11 @@ table.insert( actions,
 	id          = "DR_FETUS",
 	name 		= "Dr.Fetus",
 	description = "Unlimited bombs!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/dr_fetus.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/dr_fetus.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
-	price = 1350,
+	price = 750,
 	mana = 90,
 	--max_uses = 0,
 	--custom_xml_file = "data/entities/misc/custom_cards/bomb.xml",
@@ -113,7 +117,7 @@ table.insert( actions,
 	id          = "INFESTATION_2",
 	name 		= "Infestation 2",
 	description = "Enemeies are infested!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/infestation2.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/infestation2.png",
 	--sprite_unidentified = "data/ui_gfx/gun_actions/freeze_unidentified.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
@@ -122,9 +126,6 @@ table.insert( actions,
 	mana = 25,
 	--max_uses = 50,
 	action 		= function()
-		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-		local rnd = Random(1,10)
-		if rnd >= 7 then return end
 		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/infestation2.xml,"
 		draw_actions( 1, true )
 	end,
@@ -135,7 +136,7 @@ table.insert( actions,
 	id          = "TECH_2",
 	name 		= "Technology 2",
 	description = "Bzzzzzzzzzt!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/technology_2.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/technology_2.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1",
@@ -157,7 +158,7 @@ table.insert( actions,
 	id          = "TECH_1",
 	name 		= "Technology",
 	description = "Bzzzt!",
-	sprite 		= "mods/Binding-of-Noita/files/actions/technology_1.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/technology_1.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1",
 	spawn_probability	= "1,1",
@@ -177,11 +178,11 @@ table.insert( actions,
 	id          = "POLYPHEMUS",
 	name 		= "Polyphemus",
 	description = "Crippling damage",
-	sprite 		= "mods/Binding-of-Noita/files/actions/polyphemus.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/polyphemus.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "3,4,5,6",
 	spawn_probability                 = "0.4,0.4,0.4,0.4",
-	price = 750,
+	price = 950,
 	mana = 40,
 	action 		= function()
 		c.damage_projectile_add = c.damage_projectile_add + .7
@@ -200,7 +201,7 @@ table.insert( actions,
 	id          = "SACRED_HEART",
 	name 		= "Sacred Heart",
 	description = "Guides your spells with holy might",
-	sprite 		= "mods/Binding-of-Noita/files/actions/sacred_heart.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/sacred_heart.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "4,5,6",
 	spawn_probability                 = "0.2,0.2,0.2",
@@ -223,7 +224,7 @@ table.insert( actions,
 	id          = "SPOON_BENDER",
 	name 		= "Spoon Bender",
 	description = "Lighlty psychic spells",
-	sprite 		= "mods/Binding-of-Noita/files/actions/spoon_bender.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/spoon_bender.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "1,2,3,4,5,6",
 	spawn_probability                 = "0.5,0.5,0.5,0.5,0.5.0,5",
@@ -240,11 +241,11 @@ table.insert( actions,
 	id          = "NUMBER_ONE",
 	name 		= "Number One!",
 	description = "High fire rate at the cost of range.",
-	sprite 		= "mods/Binding-of-Noita/files/actions/number_one.png",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/number_one.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "1,2,3,4,5,6",
 	spawn_probability                 = "0.5,0.5,0.5,0.5,0.5.0,5",
-	price = 330,
+	price = 300,
 	mana = 5,
 	action 		= function()
 			c.fire_rate_wait = c.fire_rate_wait / 2

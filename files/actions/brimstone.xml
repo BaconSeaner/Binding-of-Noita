@@ -1,10 +1,10 @@
 <Entity name="$projectile_default" >
+
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
 			air_friction="0.0"
 			mass="0.0"
-			gravity_y="0.0"
-			>
+			gravity_y="0.0" >
 		</VelocityComponent>
 	</Base>
 
@@ -28,8 +28,7 @@
 		on_lifetime_out_explode="0"
 		collide_with_world="0"
 		penetrate_entities="1"
-		collide_with_tag=""
-		>
+		collide_with_tag="" >
 	</ProjectileComponent>
 
 	<LuaComponent

@@ -12,8 +12,7 @@
 			_enabled="0"
 			air_friction="-50"
 			gravity_y="0"
-			mass="0.04"
-			>
+			mass="0.04" >
 		</VelocityComponent> 
 	</Base>
 
@@ -75,15 +74,14 @@
 			light_fade_time="0.2"
 			light_r="90"
 			light_g="10"
-			light_b="10">
+			light_b="10" >
 		</config_explosion>
 	</ProjectileComponent>
 	
 	<SpriteComponent 
 		_enabled="0"
 		emissive="0"
-		image_file="data/projectiles_gfx/laser_green_big.xml" 
-		>
+		image_file="data/projectiles_gfx/laser_green_big.xml" >
 	</SpriteComponent>
 	
 	<!-- solid particle line -->

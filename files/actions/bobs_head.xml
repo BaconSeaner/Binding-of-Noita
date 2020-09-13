@@ -3,7 +3,7 @@
   <Base file="data/entities/base_projectile_physics.xml">
 
     <PhysicsImageShapeComponent 
-      image_file="mods/Binding-of-Noita/files/actions/bobs_head.png"
+      image_file="mods/Binding-of-Noita/files/sprites/bobs_head.png"
       material="acid" >
     </PhysicsImageShapeComponent>
   
