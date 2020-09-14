@@ -3,11 +3,11 @@
   <LuaComponent
 		execute_every_n_frame="-1"
 		execute_on_added="1"
-		script_source_file="mods/Binding-of-Noita/files/number_one.lua" >
+		script_source_file="mods/Binding-of-Noita/files/rubber_cement.lua" >
   </LuaComponent>
 
   <ParticleEmitterComponent 
-		emitted_material_name="spark_yellow"
+		emitted_material_name="cement"
 		offset.x="0"
 		offset.y="0"
 		x_pos_offset_min="-1"
@@ -20,12 +20,12 @@
 		y_vel_min="-2"
 		y_vel_max="2"
 		count_min="1"
-		count_max="4"
+		count_max="2"
 		is_trail="1"
 		trail_gap="1"
 		fade_based_on_lifetime="1"
-		lifetime_min="0.8"
-		lifetime_max="2.0"
+		lifetime_min="0.2"
+		lifetime_max="0.8"
 		airflow_force="1.5"
 		airflow_time="0.401"
 		airflow_scale="0.05"
