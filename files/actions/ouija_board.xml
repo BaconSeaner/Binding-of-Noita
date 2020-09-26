@@ -7,7 +7,7 @@
   </LuaComponent>
 
   <ParticleEmitterComponent 
-		emitted_material_name="spark_white"
+		emitted_material_name="cloud"
 		offset.x="0"
 		offset.y="0"
 		x_pos_offset_min="-1"

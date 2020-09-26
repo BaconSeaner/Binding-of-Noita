@@ -5,17 +5,17 @@ table.insert( actions,
 	description = "Chance to shoot a cross shot.",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/lokis_horns.png",
 	type 		= ACTION_TYPE_MODIFIER,
-	spawn_level			= "0,1,2,3,4",
-	spawn_probability	= "2,2,1,1,1",
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1,1,1",
 	price = 50,
-	mana = 0,
+	mana = 5,
 	action 		= function()
 		c.pattern_degrees = 180
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 		if Random( 1, 4 ) == 1 then								--Chance of proc
 			for i, action in ipairs( deck ) do					--For each within the deck (inorder)
 				if action.type == ACTION_TYPE_PROJECTILE then	--Find first projectile action (within deck)
-					for i = 1, 3 do action.action() end	break	--Then act it an additional 3 times
+					for i = 1, 3 do action.action() end	break	--Then act it an additional 3 times, break
 				end												--(Break so only FIRST projectile has proc)
 			end
 		end
@@ -31,7 +31,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/3_dollar_bill.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "1,1,1,1,2,2,3",
+	spawn_probability	= "1,1,1,1,1,1,1",
 	price = 260,
 	mana = 30,
 	action 		= function()
@@ -137,10 +137,10 @@ table.insert( actions,
 	action 		= function()
 			c.lightning_count = c.lightning_count + 1
 			c.damage_electricity_add = c.damage_electricity_add + 0.01
+			c.fire_rate_wait = c.fire_rate_wait - 100
+			current_reload_time = 4
 			c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
 			add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
-			c.fire_rate_wait = c.fire_rate_wait - 100
-			current_reload_time = current_reload_time - current_reload_time + 4
 	end,
 } )
 
@@ -175,13 +175,13 @@ table.insert( actions,
 	price = 950,
 	mana = 40,
 	action 		= function()
-		c.damage_projectile_add = c.damage_projectile_add + .6
-		c.speed_multiplier = c.speed_multiplier * 0.5
-		c.gore_particles    = c.gore_particles + 15
-		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 4
-		current_reload_time = (current_reload_time + 1) * 4
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+		c.damage_projectile_add = .4
+		c.speed_multiplier = c.speed_multiplier * .5
+		c.gore_particles = c.gore_particles + 15
+		c.fire_rate_wait = c.fire_rate_wait + 75
+		current_reload_time = current_reload_time + 75
 		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/polyphemus.xml,"
-		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 15.0
 		draw_actions( 1, true )
 	end,
 } )
@@ -198,13 +198,13 @@ table.insert( actions,
 	price = 1777,
 	mana = 77,
 	action 		= function()
-		c.damage_projectile_add = c.damage_projectile_add + .6
-		c.speed_multiplier = c.speed_multiplier * 0.5
-		c.gore_particles    = c.gore_particles + 15
-		c.fire_rate_wait    = (c.fire_rate_wait + 1) * 4
-		current_reload_time = (current_reload_time + 1) * 4
-		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/sacred_heart.xml,"
 		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+		c.damage_projectile_add = .6
+		c.speed_multiplier = c.speed_multiplier * .5
+		c.gore_particles = c.gore_particles + 15
+		c.fire_rate_wait = c.fire_rate_wait + 75
+		current_reload_time = current_reload_time + 75
+		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/sacred_heart.xml,"
 		draw_actions( 1, true )
 	end,
 } )
@@ -279,7 +279,75 @@ table.insert( actions,
 	end,
 } )
 
---table.insert( actions,
+table.insert( actions,
+{
+	id          = "MUTANT_SPIDER",
+	name 		= "Mutant Spider",
+	description = "Quad shot!",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/mutant_spider.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1,1,1",
+	price = 550,
+	mana = 15,
+	action 		= function()
+		c.fire_rate_wait = c.fire_rate_wait + 30
+		c.pattern_degrees = 15
+		for i, action in ipairs( deck ) do					--For each within the deck (inorder)
+			if action.type == ACTION_TYPE_PROJECTILE then	--Find first projectile action (within deck)
+				for i = 1, 3 do action.action() end	break	--Then act it an additional 3 times, break
+			end												--(Break so only FIRST projectile has proc)
+		end
+		draw_actions( 1, true )								--Draw modifiers and projectile
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "THE_WIZ",
+	name 		= "The Wiz",
+	description = "Double wiz shot!",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/the_wiz.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1,1,1",
+	price = 75,
+	mana = 5,
+	action 		= function()
+		c.pattern_degrees = 30
+		for i, action in ipairs( deck ) do					--For each within the deck (inorder)
+			if action.type == ACTION_TYPE_PROJECTILE then	--Find first projectile action (within deck)
+				action.action() break						--Then act it an additional time, break
+			end												--(Break so only FIRST projectile has proc)
+		end
+		draw_actions( 1, true )								--Draw modifiers and projectile
+	end,
+} )
+
+chem_counter = 0					--This may be a janky approach but goddamn it this works!
+table.insert( actions,
+{
+	id          = "CHEMICAL_PEEL",
+	name 		= "Chemical Peel",
+	description = "Every second cast deals extra damage",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/chemical_peel.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level                       = "0,1,2,3,4,5,6",
+	spawn_probability                 = "1,1,1,1,1,1,1",
+	price = 450,
+	mana = 7,
+	action 		= function()		--Add damage to every even shot
+			if chem_counter % 2 == 0 then
+				c.extra_entities = c.extra_entities .. "data/entities/particles/tinyspark_green.xml,"
+				c.damage_projectile_add = .2
+			end
+									--Count chem procs
+			chem_counter = chem_counter + 1
+			draw_actions( 1, true )
+	end,
+} )
+
+--table.insert( actions,									--TODO: Parasite.lua, take 2 of 3 shots (Original + 2 copies) fire copies when collision
 --{
 --	id          = "PARASITE",
 --	name 		= "Parasite",

@@ -2,14 +2,20 @@
 	name="Binding of Noita"
 	description="A mod that aims to add as many items from Binding of Isaac as possible to Noita.
 This mod is a work in progress where I will gradually add items.
+
+Spells marked with a '*' indicate that they do NOT multicast (Draw multiple spells),
+instead they 'clone' a projectile with all its modifiers multple times.
+(This behavior can be seen in the Loki's Horns preview.)
 [hr][/hr]
-[h1]Currently added:[/h1]
+[h1]Spells:[/h1]
 [list]
 	[*]3 Dollar Bill
 	[*]Bob's Rotten Head
 	[*]Brimstone
+	[*]Chemical Peel
 	[*]Dr. Fetus
-	[*]Loki's Horns
+	[*]*Loki's Horns
+	[*]*Mutant Spider
 	[*]Number One!
 	[*]Ouija Board
 	[*]Polyphemus
@@ -19,6 +25,7 @@ This mod is a work in progress where I will gradually add items.
 	[*]Infestation 2
 	[*]Technology
 	[*]Technology 2
+	[*]*The Wiz
 [/list]
 [hr][/hr]
 [h1]Some previews:[/h1]
