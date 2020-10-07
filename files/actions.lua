@@ -1,7 +1,7 @@
 function clone_next_projectile( how_many )
 	for i, action in ipairs( deck ) do					
 		if action.type == ACTION_TYPE_PROJECTILE then	--Find (inorder) projectile action within deck
-			for i = 1, how_many do						--Act it N times
+			for j = 1, how_many do						--Act it N times
 				action.action() 
 			end	break									--Break so only next (first) projectile is cloned
 		end
@@ -58,7 +58,7 @@ table.insert( actions,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
 	price = 1666,
-	mana = 90,
+	mana = 125,
 	action 		= function()
 		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_charge.xml")
 		--Charge effect
@@ -74,7 +74,7 @@ table.insert( actions,
 	end,
 } )
 
-chem_counter = 0				--This may be a janky approach but goddamn it this works!
+chem_counter = 0				--This is janky but dammit it works
 table.insert( actions,
 {
 	id          = "CHEMICAL_PEEL",
@@ -114,11 +114,31 @@ table.insert( actions,
 	end,
 } )
 
+--table.insert( actions,			--Much like 3 Dollar Bill, except using spells from mod
+--{									--Functional but will be enabled when more projectiles are available
+--	id          = "FRUIT_CAKE",
+--	name 		= "Fruit Cake",
+--	description = "A rainbow of spells!",
+--	sprite 		= "mods/Binding-of-Noita/files/sprites/fruit_cake.png",
+--	type 		= ACTION_TYPE_PROJECTILE,
+--	spawn_level			= "0,1,2,3,4,5,6",
+--	spawn_probability	= "1,1,1,1,1,1,1",
+--	price = 260,
+--	mana = 30,
+--	action 		= function()
+--		local types = {"bobs_head", "technology", "brimstone_beam", "polyphemus"}
+--		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+--		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"
+--		add_projectile("mods/Binding-of-Noita/files/actions/" .. rand_shot)
+--		c.fire_rate_wait = c.fire_rate_wait + 10
+--	end,
+--} )
+
 table.insert( actions,
 {
 	id          = "INFESTATION_2",
 	name 		= "Infestation 2",
-	description = "Enemeies are infested!",
+	description = "Chance to infest enemies",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/infestation2.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
@@ -135,7 +155,7 @@ table.insert( actions,
 {
 	id          = "LOKIS_HORNS",
 	name 		= "Loki's Horns",
-	description = "Chance to shoot a cross shot.",
+	description = "Chance to shoot a cross shot",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/lokis_horns.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
@@ -154,13 +174,33 @@ table.insert( actions,
 
 table.insert( actions,
 {
+	id          = "MOMS_EYESHADOW",
+	name 		= "Mom's Eyeshadow",
+	description = "Chance to charm enemies",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/moms_eyeshadow.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= "1,1,1,1,1,1,1",
+	price = 400,
+	mana = 25,
+	action 		= function()
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		if Random( 1, 5 ) == 1 then
+			c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/moms_eyeshadow.xml,"
+		end
+		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
 	id          = "MUTANT_SPIDER",
 	name 		= "Mutant Spider",
 	description = "Quad shot!",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/mutant_spider.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "1,1,1,1,1,1,1",
+	spawn_probability	= ".4,.4,.4,.4,.4,.4,.4",
 	price = 550,
 	mana = 20,
 	action 		= function()
@@ -198,7 +238,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/ouija_board.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "0,1,2,3,4,5,6",
-	spawn_probability                 = "1,1,1,1,1,1,1",
+	spawn_probability                 = ".6,.6,.6,.6,1,1,1",
 	price = 366,
 	mana = 6,
 	action 		= function()
@@ -215,13 +255,13 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/polyphemus.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "3,4,5,6",
-	spawn_probability                 = "0.5,0.5,0.5,0.5",
+	spawn_probability                 = "0.4,0.4,0.4,0.4",
 	price = 950,
 	mana = 40,
 	action 		= function()
 		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
-		c.damage_projectile_add = .4
-		c.speed_multiplier	= c.speed_multiplier * .5
+		c.damage_projectile_add = .6
+		c.speed_multiplier	= c.speed_multiplier * .6
 		c.gore_particles	= c.gore_particles + 15
 		c.fire_rate_wait	= c.fire_rate_wait + 75
 		current_reload_time = current_reload_time + 75
@@ -234,7 +274,7 @@ table.insert( actions,
 {
 	id          = "RUBBER_CEMENT",
 	name 		= "Rubber Cement",
-	description = "Adds a bouncy effect",
+	description = "Bouncy effect",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/rubber_cement.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "0,1,2,3,4,5,6",
@@ -243,6 +283,7 @@ table.insert( actions,
 	mana = 5,
 	action 		= function()
 		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/rubber_cement.xml,"
+		c.bounces = c.bounces + 16
 		draw_actions( 1, true )
 	end,
 } )
@@ -260,8 +301,8 @@ table.insert( actions,
 	mana = 77,
 	action 		= function()
 		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
-		c.damage_projectile_add = .6
-		c.speed_multiplier = c.speed_multiplier * .5
+		c.damage_projectile_add = .8
+		c.speed_multiplier = c.speed_multiplier * .4
 		c.gore_particles = c.gore_particles + 15
 		c.fire_rate_wait = c.fire_rate_wait + 75
 		current_reload_time = current_reload_time + 75
@@ -280,7 +321,7 @@ table.insert( actions,
 	spawn_level                       = "1,2,3,4,5,6",
 	spawn_probability                 = "0.8,0.8,0.8,0.8,0.8,0.8",
 	price = 180,
-	mana = 20,
+	mana = 15,
 	action 		= function()
 		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/spoon_bender.xml,"
 		draw_actions( 1, true )
@@ -331,7 +372,7 @@ table.insert( actions,
 {
 	id          = "THE_WIZ",
 	name 		= "The Wiz",
-	description = "Double wiz shot!",
+	description = "Double shot, R U a wizard?",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/the_wiz.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
@@ -345,7 +386,10 @@ table.insert( actions,
 	end,
 } )
 
---table.insert( actions,		--TODO: parasite.lua - make clones split on collision
+---------------------------------------------------------
+--------------------ABANDONED FOR NOW--------------------
+
+--table.insert( actions,		--Possible solution may be inserting split action into deck
 --{
 --	id          = "PARASITE",
 --	name 		= "Parasite",
@@ -357,8 +401,16 @@ table.insert( actions,
 --	price = 50,
 --	mana = 0,
 --	action 		= function()
---		c.pattern_degrees = 180
---		clone_next_projectile( 2 )	
---		draw_actions( 1, true )
+--		proj_clone = {}
+--		for i, action in ipairs( deck ) do					
+--			if action.type == ACTION_TYPE_PROJECTILE then
+--				clone_action( action, proj_clone )
+--				proj_clone.action()
+--				BeginTriggerHitWorld()
+--					proj_clone.action()
+--				EndTrigger()
+--				break
+--			end
+--		end
 --	end,
 --} )

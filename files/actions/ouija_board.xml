@@ -3,7 +3,7 @@
   <LuaComponent
 		execute_every_n_frame="-1"
 		execute_on_added="1"
-		script_source_file="mods/Binding-of-Noita/files/ouija_board.lua" >
+		script_source_file="mods/Binding-of-Noita/files/scripts/ouija_board.lua" >
   </LuaComponent>
 
   <ParticleEmitterComponent 

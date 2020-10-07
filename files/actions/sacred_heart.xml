@@ -9,7 +9,7 @@
 	<LuaComponent
 		execute_every_n_frame="-1"
 		execute_on_added="1"
-		script_source_file="mods/Binding-of-Noita/files/sacred_heart.lua" >
+		script_source_file="mods/Binding-of-Noita/files/scripts/sacred_heart.lua" >
 	</LuaComponent>
 
 	<ParticleEmitterComponent 

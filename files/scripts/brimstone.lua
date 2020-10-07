@@ -1,3 +1,4 @@
+---------------------------From original mega_laser lua---------------------------
 dofile_once("data/scripts/lib/utilities.lua")
 dofile_once("data/scripts/gun/gun.lua")
 local speed = 20

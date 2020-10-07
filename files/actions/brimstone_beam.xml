@@ -36,7 +36,6 @@
 		velocity_sets_scale="1"
 		damage="1"
 		lifetime="180"
-		penetrate_entities="1"
 		hit_particle_force_multiplier="0.25"
 		knockback_force="1.5"
 		bounces_left="0"
@@ -46,10 +45,9 @@
 		spawn_entity="mods/Binding-of-Noita/files/actions/brimstone_effect.xml" >
 		<config_explosion
 			never_cache="1" 
-			never_cache="1"
 			camera_shake="8" 
 			explosion_radius="16"
-			explosion_sprite="data/particles/explosion_meteor.xml" 
+			explosion_sprite="data/particles/explosion_016_plasma_pink.xml" 
 			explosion_sprite_lifetime="0" 
 			create_cell_material="plasma_fading_pink"
 			create_cell_probability="15" 
@@ -77,12 +75,6 @@
 			light_b="10" >
 		</config_explosion>
 	</ProjectileComponent>
-	
-	<SpriteComponent 
-		_enabled="0"
-		emissive="0"
-		image_file="data/projectiles_gfx/laser_green_big.xml" >
-	</SpriteComponent>
 	
 	<!-- solid particle line -->
 	<ParticleEmitterComponent 

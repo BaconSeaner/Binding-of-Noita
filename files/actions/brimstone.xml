@@ -32,10 +32,9 @@
 	</ProjectileComponent>
 
 	<LuaComponent
-		script_source_file="mods/Binding-of-Noita/files/brimstone.lua"
+		script_source_file="mods/Binding-of-Noita/files/scripts/brimstone.lua"
 		execute_every_n_frame="30"
-		remove_after_executed="1"
-		>
+		remove_after_executed="1" >
 	</LuaComponent>
 
 	<!-- FX -->
@@ -72,8 +71,7 @@
 		randomize_angular_velocity.min="-3.5"
 		randomize_angular_velocity.max="3.5"
 		randomize_rotation.min="-90"
-		randomize_rotation.max="90"
-		>
+		randomize_rotation.max="90" >
 	</SpriteParticleEmitterComponent>
 
 	<!-- launch blast a -->
