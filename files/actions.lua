@@ -1,9 +1,9 @@
-function clone_next_projectile( how_many )
-	for i, action in ipairs( deck ) do					
+function clone_next_projectile( how_many )				--TODO: Can be improved with mana checking
+	for i, action in ipairs( deck ) do	
 		if action.type == ACTION_TYPE_PROJECTILE then	--Find (inorder) projectile action within deck
-			for j = 1, how_many do						--Act it N times
+			for j = 1, how_many do						--Act it how_many times
 				action.action() 
-			end	break									--Break so only next (first) projectile is cloned
+			end	return									--Return so only next (first) projectile is cloned
 		end
 	end
 end
@@ -16,16 +16,26 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/3_dollar_bill.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "1,1,1,1,1,1,1",
+	spawn_probability	= ".6,1,1,1,1,1,1",
 	price = 260,
-	mana = 30,
+	mana = 25,
 	action 		= function()
-		local types = {"lance","laser","bouncy_orb","spore_pod","tentacle",
+		local types = {"brimstone", "lance","laser","bouncy_orb","tentacle",
 			"rubber_ball","slime","arrow","fireball_ray","bullet_heavy",
-			"light_bullet","bullet","light_bullet_blue","bubbleshot"}	--List of random shots
+			"light_bullet","bullet","light_bullet_blue","bubbleshot"}		-- List random shots
+
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"--Select random projectile and add ".xml"
-		add_projectile("data/entities/projectiles/deck/" .. rand_shot)	--Add file path to selected projectile, then add_projectile
+		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"	-- Select and append .xml
+		if rand_shot == "brimstone.xml" then	-- Unique case for brimstone
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_charge.xml")
+			for i=1,5 do
+				add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+			end
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone.xml")
+		else									-- Default case
+			add_projectile("data/entities/projectiles/deck/" .. rand_shot)
+		end
+
 		c.fire_rate_wait = c.fire_rate_wait + 10
 	end,
 } )
@@ -56,17 +66,15 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/brimstone.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "1,1,1,1,1,1,1",
+	spawn_probability	= ".5,.5,.5,.5,1,1,1",
 	price = 1666,
-	mana = 125,
+	mana = 130,
 	action 		= function()
 		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_charge.xml")
 		--Charge effect
-		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
-		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
-		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
-		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
-		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+		for i=1,5 do
+			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
+		end
 		--Extra entities before main entity so they may be used in lua
 		add_projectile("mods/Binding-of-Noita/files/actions/brimstone.xml")
 		c.fire_rate_wait = c.fire_rate_wait + 70
@@ -114,25 +122,34 @@ table.insert( actions,
 	end,
 } )
 
---table.insert( actions,			--Much like 3 Dollar Bill, except using spells from mod
---{									--Functional but will be enabled when more projectiles are available
---	id          = "FRUIT_CAKE",
---	name 		= "Fruit Cake",
---	description = "A rainbow of spells!",
---	sprite 		= "mods/Binding-of-Noita/files/sprites/fruit_cake.png",
---	type 		= ACTION_TYPE_PROJECTILE,
---	spawn_level			= "0,1,2,3,4,5,6",
---	spawn_probability	= "1,1,1,1,1,1,1",
---	price = 260,
---	mana = 30,
---	action 		= function()
---		local types = {"bobs_head", "technology", "brimstone_beam", "polyphemus"}
---		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
---		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"
---		add_projectile("mods/Binding-of-Noita/files/actions/" .. rand_shot)
---		c.fire_rate_wait = c.fire_rate_wait + 10
---	end,
---} )
+table.insert( actions,
+{
+	id          = "FRUIT_CAKE",
+	name 		= "Fruit Cake",
+	description = "A rainbow of effects!",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/fruit_cake.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "1,2,3,4,5,6",
+	spawn_probability	= ".5,1,1,1,1,1",
+	price = 280,
+	mana = 15,
+	action 		= function()
+		local types = {"infestation2", "rubber_cement", "polyphemus", "number_one",
+			"spoon_bender", "ouija_board", "moms_eyeshadow", "mutant_spider"}
+
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		local rand_mod = tostring( types[Random(1, #types)] ) .. ".xml,"
+		if rand_mod == "mutant_spider.xml," then
+			c.fire_rate_wait = c.fire_rate_wait + 15
+			c.pattern_degrees = 10
+			clone_next_projectile(3)
+		else
+			c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/" .. rand_mod
+		end
+
+		draw_actions( 1, true )
+	end,
+} )
 
 table.insert( actions,
 {
@@ -144,7 +161,7 @@ table.insert( actions,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= "1,1,1,1,1,1,1",
 	price = 400,
-	mana = 25,
+	mana = 20,
 	action 		= function()
 		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/infestation2.xml,"
 		draw_actions( 1, true )
@@ -184,10 +201,7 @@ table.insert( actions,
 	price = 400,
 	mana = 25,
 	action 		= function()
-		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-		if Random( 1, 5 ) == 1 then
-			c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/moms_eyeshadow.xml,"
-		end
+		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/moms_eyeshadow.xml,"
 		draw_actions( 1, true )
 	end,
 } )
@@ -341,8 +355,7 @@ table.insert( actions,
 	mana = 6,
 	action 		= function()
 		c.lightning_count = c.lightning_count + 1
-		c.damage_electricity_add = c.damage_electricity_add + 0.01
-		c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
+		c.damage_electricity_add = c.damage_electricity_add + 0.1
 		add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
 	end,
 } )
@@ -361,9 +374,8 @@ table.insert( actions,
 	action 		= function()
 		c.lightning_count = c.lightning_count + 1
 		c.damage_electricity_add = c.damage_electricity_add + 0.01
-		c.fire_rate_wait = c.fire_rate_wait - 100
-		current_reload_time = 4
-		c.extra_entities = c.extra_entities .. "data/entities/particles/electricity.xml,"
+		c.fire_rate_wait = c.fire_rate_wait - (c.fire_rate_wait - 4)
+		current_reload_time = 5
 		add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
 	end,
 } )

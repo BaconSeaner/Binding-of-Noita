@@ -1,13 +1,13 @@
 dofile_once("data/scripts/lib/utilities.lua")
 
 SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-if Random(1,3) == 1 then return end		--Chance of proc
+if Random(1,3) == 1 then return end		-- Chance of proc
 
-local entity_id = GetUpdatedEntityID()	--Init...
+local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
 local target_id = EntityGetClosestWithTag( x, y, "enemy")
 
-local hit = false						--Verify target was hit and is an intended entity
+local hit = false						-- Verify target was hit and is an intended entity
 for k, v in pairs(EntityGetInRadiusWithTag( x, y, 2, "enemy" )) do
 	if v == target_id then
 		hit = true
@@ -15,7 +15,7 @@ for k, v in pairs(EntityGetInRadiusWithTag( x, y, 2, "enemy" )) do
 end
 if not hit or EntityGetName( target_id ) == "$animal_longleg" then return end
 
-local entity_count = Random(1, 2)		--Spawn 1 or 2 friends!
+local entity_count = Random(1, 2)		-- Spawn 1 or 2 friends!
 for j=1,entity_count do
 	local eid = EntityLoad( "data/entities/animals/longleg.xml", x, y )
 
@@ -24,7 +24,7 @@ for j=1,entity_count do
 		ComponentSetValue( charm_component, "frames", -1 )
 	end
 
-										--So that hatched enemies don't drop gold
+	-- So that friends don't drop gold
 	local lua_components = EntityGetComponent( eid, "LuaComponent")
 	if( lua_components ~= nil ) then
 		for i,lua_comp in ipairs(lua_components) do
@@ -33,7 +33,7 @@ for j=1,entity_count do
 			end
 		end
 	end
-										--Super-friends!
+	-- Super-friends!
 	local damagemodels = EntityGetComponent( eid, "DamageModelComponent" )
 	if( damagemodels ~= nil ) then
 		for i,damagemodel in ipairs(damagemodels) do
