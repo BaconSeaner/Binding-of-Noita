@@ -1,0 +1,38 @@
+<Entity>
+
+  <LuaComponent
+    script_source_file="mods/Binding-of-Noita/files/scripts/eye_of_belial_effect.lua"
+    execute_every_n_frame="2" >
+  </LuaComponent>
+
+  <LuaComponent
+    script_source_file="mods/Binding-of-Noita/files/scripts/eye_of_belial.lua"
+    execute_every_n_frame="-1"
+    execute_on_added="1" >
+  </LuaComponent>
+
+  <AreaDamageComponent
+    aabb_min.x="-8"
+    aabb_min.y="-8"
+    aabb_max.x="8"
+    aabb_max.y="8"
+    damage_per_frame="0.14"
+    update_every_n_frame="1"
+    entities_with_tag="homing_target"
+    damage_type="DAMAGE_PROJECTILE" >
+  </AreaDamageComponent>
+
+  <AudioLoopComponent
+    file="data/audio/Desktop/animals.bank"
+    event_name="animals/ghost/movement_loop"
+    set_speed_parameter="1"
+    auto_play="1" >
+  </AudioLoopComponent>
+
+  <AudioLoopComponent
+    file="data/audio/Desktop/projectiles.bank"
+    event_name="projectiles/magic_curse/loop"
+    auto_play="1" >
+  </AudioLoopComponent>
+  
+</Entity>

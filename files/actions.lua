@@ -15,17 +15,18 @@ table.insert( actions,
 	description = "A rainbow of spells!",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/3_dollar_bill.png",
 	type 		= ACTION_TYPE_PROJECTILE,
-	spawn_level			= "0,2,3,4,5,6",
-	spawn_probability	= ".4,.7,.7,.7,.4,.4",
+	spawn_level			= "0,2,4,6",
+	spawn_probability	= ".3,.7,.7,.7",
 	price = 260,
 	mana = 25,
 	action 		= function()
+		c.fire_rate_wait = c.fire_rate_wait + 10
 		local types = {"brimstone", "lance","laser","bouncy_orb","tentacle",
 			"rubber_ball","slime","arrow","fireball_ray","bullet_heavy",
-			"light_bullet","bullet","light_bullet_blue","bubbleshot"}		-- List random shots
-
+			"light_bullet","bullet","light_bullet_blue","bubbleshot"}
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
-		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"	-- Select and append .xml
+		local rand_shot = tostring( types[Random(1, #types)] ) .. ".xml"
+
 		if rand_shot == "brimstone.xml" then	-- Unique case for brimstone
 			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_charge.xml")
 			for i=1,5 do
@@ -35,20 +36,18 @@ table.insert( actions,
 		else									-- Default case
 			add_projectile("data/entities/projectiles/deck/" .. rand_shot)
 		end
-
-		c.fire_rate_wait = c.fire_rate_wait + 10
 	end,
 } )
 
-table.insert( actions,
+table.insert( actions,		--TODO: Explosion could be better
 {
 	id          = "BOBS_HEAD",
 	name 		= "Bob's Rotten Head",
 	description = "Acidic Bomb",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/bobs_head.png",
 	type 		= ACTION_TYPE_PROJECTILE,
-	spawn_level			= "0,3",
-	spawn_probability	= "1,1",
+	spawn_level			= "0,2,3",
+	spawn_probability	= "1,1,.5",
 	price = 160,
 	mana = 40,
 	max_uses = 16,
@@ -66,7 +65,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/brimstone.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= ".5,.5,.5,.5,.5,.9,.9",
+	spawn_probability	= ".2,.2,.3,.5,.5,.9,.9",
 	price = 1666,
 	mana = 130,
 	action 		= function()
@@ -90,8 +89,8 @@ table.insert( actions,
 	description = "Every second cast deals extra damage",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/chemical_peel.png",
 	type 		= ACTION_TYPE_MODIFIER,
-	spawn_level                       = "0,2,4,6",
-	spawn_probability                 = ".4,.6,.8,.8",
+	spawn_level                       = "0,1,2,3,4,5,6",
+	spawn_probability                 = ".4,.4,.4,.4,.4,.4,.4",
 	price = 250,
 	mana = 7,
 	action 		= function()	--Add damage to every even shot
@@ -113,12 +112,29 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/dr_fetus.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,3,4,5,6",
-	spawn_probability	= ".2,.6,.6,.6,.6",
+	spawn_probability	= ".5,.3,.3,.3,.3",
 	price = 750,
 	mana = 65,
 	action 		= function()
 		add_projectile("data/entities/projectiles/bomb.xml")
 		c.fire_rate_wait = c.fire_rate_wait + 120
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "EYE_OF_BELIAL",
+	name 		= "Eye of Belial",
+	description = "Possessed spells!",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/eye_of_belial.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= ".2,.2,.3,.3,.4,.4,.5",
+	price = 566,
+	mana = 13,
+	action 		= function()
+		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/eye_of_belial.xml,"
+		draw_actions( 1, true )
 	end,
 } )
 
@@ -135,7 +151,7 @@ table.insert( actions,
 	mana = 15,
 	action 		= function()
 		local types = {"infestation2", "rubber_cement", "polyphemus", "number_one",
-			"spoon_bender", "ouija_board", "moms_eyeshadow", "mutant_spider"}
+			"spoon_bender", "ouija_board", "moms_eyeshadow", "mutant_spider", "eye_of_belial"}
 
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 		local rand_mod = tostring( types[Random(1, #types)] ) .. ".xml,"
@@ -175,8 +191,8 @@ table.insert( actions,
 	description = "Chance to shoot a cross shot",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/lokis_horns.png",
 	type 		= ACTION_TYPE_MODIFIER,
-	spawn_level			= "1,3,5",
-	spawn_probability	= ".9,.9,.9",
+	spawn_level			= "0,1,3,5",
+	spawn_probability	= ".9,.9,.9,.9",
 	price = 50,
 	mana = 8,
 	action 		= function()
@@ -189,7 +205,7 @@ table.insert( actions,
 	end,
 } )
 
-table.insert( actions,
+table.insert( actions,			--TODO: Fix charming of unintended entities like lamps and shit
 {
 	id          = "MOMS_EYESHADOW",
 	name 		= "Mom's Eyeshadow",
@@ -214,7 +230,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/mutant_spider.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,2,3,4,5,6",
-	spawn_probability	= ".2,.4,.4,.4,.4,.4",
+	spawn_probability	= ".2,.2,.3,.3,.4,.4",
 	price = 550,
 	mana = 20,
 	action 		= function()
@@ -252,7 +268,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/ouija_board.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level                       = "0,1,2,3,4,5,6",
-	spawn_probability                 = ".6,.6,.6,.6,1,1,1",
+	spawn_probability                 = ".2,.4,.6,.6,.8,1,1",
 	price = 366,
 	mana = 6,
 	action 		= function()
@@ -350,7 +366,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/technology_1.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1",
-	spawn_probability	= ".6,.8",
+	spawn_probability	= ".8,.8",
 	price = 240,
 	mana = 6,
 	action 		= function()
@@ -368,7 +384,7 @@ table.insert( actions,
 	sprite 		= "mods/Binding-of-Noita/files/sprites/technology_2.png",
 	type 		= ACTION_TYPE_PROJECTILE,
 	spawn_level			= "0,1,2,3,4,5,6",
-	spawn_probability	= "0.4,0.5,.5,.5,.5,.5,.5",
+	spawn_probability	= "0.2,0.2,.5,.5,.5,.5,.5",
 	price = 480,
 	mana = 4,
 	action 		= function()

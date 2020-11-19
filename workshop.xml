@@ -3,7 +3,7 @@
 	description="A mod that aims to add as many items from Binding of Isaac as possible to Noita.
 This mod is a work in progress where I will gradually add items.
 
-Spells in this mod will appear randomly throughout the world like any other spell, if you want to spawn these spells I recommend [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1984977713] CheatGUI [/url] or launching with noita_dev.exe found in the games directory, and pressing F5. 
+Spells in this mod will appear randomly throughout the world like any other spell, if you want to spawn these spells I recommend using [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1984977713] CheatGUI [/url].
 
 Spells marked with a '*' indicate that they do NOT multicast, instead they 'clone' a projectile.
 [hr][/hr]
@@ -14,6 +14,7 @@ Spells marked with a '*' indicate that they do NOT multicast, instead they 'clon
 	[*]Brimstone
 	[*]Chemical Peel
 	[*]Dr. Fetus
+	[*]Eye of Belial
 	[*]Fruit Cake
 	[*]Infestation 2
 	[*]*Loki's Horns
@@ -48,8 +49,17 @@ Spells marked with a '*' indicate that they do NOT multicast, instead they 'clon
 
 [b]3 Dollar Bill + Loki's Horns[/b]
 [img]https://media4.giphy.com/media/UWz7DQIosw0wdeyBNd/giphy.gif[/img]
+
+[b]Eye of Belial[/b]
+[img]https://media3.giphy.com/media/AEJolxF7pCWuFQpJyF/giphy.gif[/img]
+
+[b]Ouija Board[/b]
+[img]https://media3.giphy.com/media/3dghI3S8lEaIRd7x66/giphy.gif[/img]
+
+[b]Rubber Cement[/b]
+[img]https://media4.giphy.com/media/N14NcHeOW9RRVuRAvp/giphy.gif[/img]
 [img]https://i.imgur.com/z5QmOTt.gif[/img]"
 	tags="spells"
 	dont_upload_folders=".vs"
-	dont_upload_files=".gitignore, README.md" > 
+	dont_upload_files=".gitignore, README.md, LICENSE" > 
 </Mod>
