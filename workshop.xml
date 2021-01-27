@@ -17,6 +17,7 @@ Spells marked with a '*' indicate that they do NOT multicast, instead they 'clon
 	[*]Eye of Belial
 	[*]Fruit Cake
 	[*]Infestation 2
+  [*]Ipecac
 	[*]*Loki's Horns
 	[*]Mom's Eyeshadow
 	[*]*Mutant Spider
@@ -61,5 +62,5 @@ Spells marked with a '*' indicate that they do NOT multicast, instead they 'clon
 [img]https://i.imgur.com/z5QmOTt.gif[/img]"
 	tags="spells"
 	dont_upload_folders=".vs"
-	dont_upload_files=".gitignore, README.md, LICENSE" > 
+	dont_upload_files=".gitignore, Binding-of-Noita.deproj, Binding-of-Noita.deuser, README.md, LICENSE" > 
 </Mod>

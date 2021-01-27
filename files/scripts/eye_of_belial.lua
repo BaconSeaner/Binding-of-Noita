@@ -6,7 +6,6 @@ if proj_comps then
         local lifetime = ComponentGetValue2( comp, "lifetime" )
         ComponentSetValue2( comp, "lifetime", lifetime * 2 )
 		ComponentSetValue2( comp, "collide_with_entities" , false )
-        ComponentSetValue2( comp, "on_collision_die" , false )
     end
 end
 

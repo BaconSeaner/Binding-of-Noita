@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Binding-of-Noita.deuser
+/Binding-of-Noita.deproj

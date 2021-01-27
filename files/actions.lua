@@ -1,9 +1,9 @@
-function clone_next_projectile( how_many )				--TODO: Can be improved with mana checking
+function clone_next_projectile( how_many )				-- TODO: Can be improved with mana checking
 	for i, action in ipairs( deck ) do	
-		if action.type == ACTION_TYPE_PROJECTILE then	--Find (inorder) projectile action within deck
-			for j = 1, how_many do						--Act it how_many times
+		if action.type == ACTION_TYPE_PROJECTILE then	-- Find next projectile in deck
+			for j = 1, how_many do						-- Act it how_many times
 				action.action() 
-			end	return									--Return so only next (first) projectile is cloned
+			end	return									-- Return after next projectile is cloned
 		end
 	end
 end
@@ -39,7 +39,7 @@ table.insert( actions,
 	end,
 } )
 
-table.insert( actions,		--TODO: Explosion could be better
+table.insert( actions,
 {
 	id          = "BOBS_HEAD",
 	name 		= "Bob's Rotten Head",
@@ -67,21 +67,21 @@ table.insert( actions,
 	spawn_level			= "0,1,2,3,4,5,6",
 	spawn_probability	= ".2,.2,.3,.5,.5,.9,.9",
 	price = 1666,
-	mana = 130,
+	mana = 125,
 	action 		= function()
 		add_projectile("mods/Binding-of-Noita/files/actions/brimstone_charge.xml")
-		--Charge effect
+		-- Initial smaller beam
 		for i=1,5 do
 			add_projectile("mods/Binding-of-Noita/files/actions/brimstone_beam.xml")
 		end
-		--Extra entities before main entity so they may be used in lua
+		-- Powerful beams to be combined in lua
 		add_projectile("mods/Binding-of-Noita/files/actions/brimstone.xml")
 		c.fire_rate_wait = c.fire_rate_wait + 70
 		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
 	end,
 } )
 
-chem_counter = 0				--This is janky but dammit it works
+chem_counter = 0                -- To determine every even shot
 table.insert( actions,
 {
 	id          = "CHEMICAL_PEEL",
@@ -93,10 +93,10 @@ table.insert( actions,
 	spawn_probability                 = ".4,.4,.4,.4,.4,.4,.4",
 	price = 250,
 	mana = 7,
-	action 		= function()	--Add damage to every even shot
+	action 		= function()	-- Add effect to every even shot
 		if chem_counter % 2 == 0 then
 			c.extra_entities = c.extra_entities .. "data/entities/particles/tinyspark_green.xml,"
-			c.damage_projectile_add = .2
+			c.damage_projectile_add = .1
 		end
 
 		chem_counter = chem_counter + 1
@@ -186,6 +186,26 @@ table.insert( actions,
 
 table.insert( actions,
 {
+	id          = "IPECAC",
+	name 		= "Ipecac",
+	description = "Explosive bile!",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/ipecac.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= ".2,.2,.2,.3,.2,.2,.2",
+	price = 650,
+	mana = 30,
+	action 		= function()
+		c.speed_multiplier = c.speed_multiplier * 0.3
+		c.fire_rate_wait = c.fire_rate_wait + 40
+		current_reload_time = current_reload_time + 40
+		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/ipecac.xml,"
+		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
 	id          = "LOKIS_HORNS",
 	name 		= "Loki's Horns",
 	description = "Chance to shoot a cross shot",
@@ -199,13 +219,13 @@ table.insert( actions,
 		c.pattern_degrees = 180
 		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 		if Random( 1, 5 ) == 1 then
-			clone_next_projectile( 3 )	--Clone 3 in addition to drawn projectile
+			clone_next_projectile( 3 )	-- Clone 3 in addition to drawn projectile
 		end
 		draw_actions( 1, true )
 	end,
 } )
 
-table.insert( actions,			--TODO: Fix charming of unintended entities like lamps and shit
+table.insert( actions,			-- NOTE: Some unintened entities may be getting charmed
 {
 	id          = "MOMS_EYESHADOW",
 	name 		= "Mom's Eyeshadow",
@@ -236,7 +256,7 @@ table.insert( actions,
 	action 		= function()
 		c.fire_rate_wait = c.fire_rate_wait + 24
 		c.pattern_degrees = 10
-		clone_next_projectile( 3 )	--Clone 3 in addition to drawn projectile
+		clone_next_projectile( 3 )	-- Clone 3 in addition to drawn projectile
 		draw_actions( 1, true )
 	end,
 } )
@@ -272,8 +292,8 @@ table.insert( actions,
 	price = 366,
 	mana = 6,
 	action 		= function()
-			c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/ouija_board.xml,"
-			draw_actions( 1, true )
+		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/ouija_board.xml,"
+		draw_actions( 1, true )
 	end,
 } )
 
@@ -429,16 +449,15 @@ table.insert( actions,
 --	price = 50,
 --	mana = 0,
 --	action 		= function()
---		proj_clone = {}
---		for i, action in ipairs( deck ) do					
---			if action.type == ACTION_TYPE_PROJECTILE then
---				clone_action( action, proj_clone )
---				proj_clone.action()
---				BeginTriggerHitWorld()
---					proj_clone.action()
---				EndTrigger()
---				break
---			end
+--		clone_next_projectile( 2 )	-- This is just action.action() 2 times (From the next drawn action)
+--		draw_actions( 1, true )		-- Draw modifiers and projectile
+--
+--		-- Find the cloned actions by tag
+--		local entity_id = GetUpdatedEntityID()
+--		local x, y = EntityGetTransform( entity_id )
+--		local clone_ids = EntityGetInRadiusWithTag( x, y, 16, "card_action" )
+--		for _,clone_id in pairs( clone_ids ) do
+--			-- This is a bad approach
 --		end
 --	end,
 --} )
