@@ -391,7 +391,10 @@ table.insert( actions,
 	mana = 6,
 	action 		= function()
 		c.lightning_count = c.lightning_count + 1
-		c.damage_electricity_add = c.damage_electricity_add + 0.1
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		if Random(1, 5) == 10 then
+			c.damage_electricity_add = c.damage_electricity_add + 0.1
+		end
 		add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
 	end,
 } )
@@ -409,9 +412,17 @@ table.insert( actions,
 	mana = 4,
 	action 		= function()
 		c.lightning_count = c.lightning_count + 1
-		c.damage_electricity_add = c.damage_electricity_add + 0.01
-		c.fire_rate_wait = c.fire_rate_wait - (c.fire_rate_wait - 4)
-		current_reload_time = 5
+		c.fire_rate_wait = 7
+		--for i, action in ipairs( deck ) do					-- No reload if last projectile in deck
+		--	print(action.id)
+		--end
+		if next(deck) == nil then
+			current_reload_time = 7
+		end
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		if Random(1, 10) == 10 then
+			c.damage_electricity_add = c.damage_electricity_add + 0.1
+		end
 		add_projectile("mods/Binding-of-Noita/files/actions/technology.xml")
 	end,
 } )
