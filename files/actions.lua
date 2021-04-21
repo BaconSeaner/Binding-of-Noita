@@ -169,6 +169,25 @@ table.insert( actions,
 
 table.insert( actions,
 {
+	id          = "HEAD_OF_THE_KEEPER",
+	name 		= "Head of the Keeper",
+	description = "Spells have hance to drop gold on hit",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/head_of_the_keeper.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= ".2,.2,.2,.2,.2,.2,.2",
+	price = 400,
+	mana = 5,
+	action 		= function()
+		--if Random(1,10) == 1 then
+			c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/head_of_the_keeper.xml,"
+		--end
+		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
 	id          = "INFESTATION_2",
 	name 		= "Infestation 2",
 	description = "Chance to infest enemies",
@@ -273,8 +292,8 @@ table.insert( actions,
 	price = 300,
 	mana = 5,
 	action 		= function()
-			c.fire_rate_wait = c.fire_rate_wait / 2
-			current_reload_time = current_reload_time / 2
+			c.fire_rate_wait = c.fire_rate_wait * .5
+			current_reload_time = current_reload_time * .5
 			c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/number_one.xml,"
 			draw_actions( 1, true )
 	end,

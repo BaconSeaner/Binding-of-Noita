@@ -1,0 +1,8 @@
+<Entity>
+  <!-- Idealy this would spawn gold, doing that has side effects -->
+  <HitEffectComponent
+      effect_hit="LOAD_ENTITY"
+      value_string="mods/Binding-of-Noita/files/actions/head_of_the_keeper_effect.xml" >
+  </HitEffectComponent >
+
+</Entity>
