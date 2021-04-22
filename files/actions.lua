@@ -142,7 +142,7 @@ table.insert( actions,
 {
 	id          = "FRUIT_CAKE",
 	name 		= "Fruit Cake",
-	description = "A rainbow of effects!",
+	description = "A rainbow of modifiers!",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/fruit_cake.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "1,2,3,4,5,6",
@@ -312,6 +312,30 @@ table.insert( actions,
 	mana = 6,
 	action 		= function()
 		c.extra_entities    = c.extra_entities .. "mods/Binding-of-Noita/files/actions/ouija_board.xml,"
+		draw_actions( 1, true )
+	end,
+} )
+
+table.insert( actions,
+{
+	id          = "PLAYDOUGH_COOKIE",
+	name 		= "Playdough Cookie",
+	description = "A rainbow of effects!",
+	sprite 		= "mods/Binding-of-Noita/files/sprites/playdough_cookie.png",
+	type 		= ACTION_TYPE_MODIFIER,
+	spawn_level			= "0,1,2,3,4,5,6",
+	spawn_probability	= ".2,.2,.2,.2,.2,.2,.2",
+	price = 280,
+	mana = 15,
+	action 		= function()
+		local types = {"confusion", "apply_on_fire", "charm_short", "frozen_short", "drunk", "oiled",
+			"electricity", "rainbow_farts", "poison", "radioactive", "jarate", "bloody" }
+
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		local rand_effect = tostring( types[Random(1, #types)] ) .. ".xml,"
+		c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_" .. rand_effect
+		c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/playdough_cookie.xml,"
+
 		draw_actions( 1, true )
 	end,
 } )

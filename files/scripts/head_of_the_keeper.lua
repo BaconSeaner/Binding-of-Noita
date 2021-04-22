@@ -1,6 +1,5 @@
 SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 if Random(1,5) ~= 1 then return end		-- Chance of proc
-print("Keeper Proc!")
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
