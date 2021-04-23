@@ -171,7 +171,7 @@ table.insert( actions,
 {
 	id          = "HEAD_OF_THE_KEEPER",
 	name 		= "Head of the Keeper",
-	description = "Spells have hance to drop gold on hit",
+	description = "Spells have chance to drop gold on hit",
 	sprite 		= "mods/Binding-of-Noita/files/sprites/head_of_the_keeper.png",
 	type 		= ACTION_TYPE_MODIFIER,
 	spawn_level			= "0,1,2,3,4,5,6",
@@ -179,9 +179,11 @@ table.insert( actions,
 	price = 400,
 	mana = 5,
 	action 		= function()
-		--if Random(1,10) == 1 then
+		SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+		if Random(1,4) == 1 then
 			c.extra_entities = c.extra_entities .. "mods/Binding-of-Noita/files/actions/head_of_the_keeper.xml,"
-		--end
+		end
+		c.extra_entities = c.extra_entities .. "data/entities/particles/gold_sparks.xml,"
 		draw_actions( 1, true )
 	end,
 } )
